@@ -5,7 +5,7 @@ const ThemeSwitcher: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
 
   return (
-      <button onClick={toggleTheme}>{theme}</button>
+      <button className='text-primary' onClick={toggleTheme}>{theme}</button>
   );
 };
 

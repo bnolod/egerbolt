@@ -9,24 +9,24 @@ module.exports = {
     function ({ addBase }) {
       addBase({
         ":root": {
-          "--accent-primary": "#FFD000",
-          "--accent-secondary": "#F3DE70",
+          "--accent-primary": "#d19c1d",
+          "--accent-secondary": "#ffcb69",
 
-          "--background-primary": "#E6EBE0",
-          "--background-secondary": "#c6cbc0",
+          "--background-primary": "#f0e5e1",
+          "--background-secondary": "#e6d5ce",
 
           "--text-primary": "#000000",
           "--text-secondary": "#555555"
         },
         ".dark": {
-          "--accent-primary": "#FFD000",
-          "--accent-secondary": "#F3DE70",
+          "--accent-primary": "#d19c1d",
+          "--accent-secondary": "#ffcb69",
 
-          "--background-primary": "#222222",
-          "--background-secondary": "#555555",
+          "--background-primary": "#16141c",
+          "--background-secondary": "#26242c",
 
           "--text-primary": "#ffffff",
-          "--text-secondary": "#aaaaaa"
+          "--text-secondary": "#cccccc"
         },
       });
     },
