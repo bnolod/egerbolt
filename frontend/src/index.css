@@ -2,17 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-    height: 100%;
-    width: 100%;
-}
+@layer utilities {
+  .bg-primary {
+    background-color: var(--background-primary);
+  }
+  .bg-secondary {
+    background-color: var(--background-secondary);
+  }
+  .bg-accent-primary {
+    background-color: var(--accent-primary);
+  }
+  .bg-accent-secondary {
+    background-color: var(--accent-secondary);
+  }
 
-:root {
-    height:100%;
-    width:100%;
-}
-
-#root {
-    height:100%;
-    width:100%;
+  .text-primary {
+    color: var(--text-primary);
+  }
+  .text-secondary {
+    color: var(--text-secondary);
+  }
+  .text-accent-primary {
+    color: var(--accent-primary)
+  }
+  .text-accent-secondary {
+    color: var(--accent-secondary);
+  }
 }
