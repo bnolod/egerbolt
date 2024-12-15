@@ -18,7 +18,7 @@ async function main() {
     }
   }
 
-  for (let i = 1; i < 100; i++) {
+  for (let i = 1; i < 500; i++) {
     await prisma.user.create({
       data: {
         email: faker.internet.email(),
@@ -32,6 +32,7 @@ async function main() {
         description: faker.lorem.words(10),
         price: faker.number.int({ min: 500, max: 50000, multipleOf: 500 }),
         image: faker.image.urlLoremFlickr(),
+        quantity: faker.number.int({min:0, max:50})
       },
     });
     for (let n = 0; n < productTypesArray.length; n++) {

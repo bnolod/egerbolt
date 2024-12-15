@@ -30,7 +30,8 @@ model Product {
   description String
   price       Int
   image       String
-
+  quantity Int
+  
   types ProductToType[]
   // ProductToType ProductToType @relation(fields: [type], references: [productType])
   Cart  Cart[]
