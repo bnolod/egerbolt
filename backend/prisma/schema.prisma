@@ -13,7 +13,46 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Teszt {
-  id Int @id @default(autoincrement())
-  adat1 String
+model User {
+  id       Int    @id @default(autoincrement())
+  email    String
+  password String
+  username String
+
+  Cart     Cart[]
+
+  @@map("users")
+}
+
+model Product {
+  id          Int         @id @default(autoincrement())
+  name        String
+  description String
+  price       Int
+  image       String
+  type        String
+
+  productType ProductType @relation(fields: [type], references: [productType])
+  Cart      Cart[]
+
+  @@map("products")
+}
+
+model ProductType {
+  productType String    @unique
+  products    Product[]
+
+  @@map("product_types")
+}
+
+model Cart {
+  id         Int @id @default(autoincrement())
+  user_id    Int
+  product_id Int
+  amount     Int
+
+  Product Product @relation(fields: [product_id], references: [id])
+  User    User    @relation(fields: [user_id], references: [id])
+
+  @@map("carts")
 }
