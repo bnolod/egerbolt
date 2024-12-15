@@ -7,5 +7,5 @@ interface ScreenProps {
 }
 
 export default function Screen({ theme, children }: ScreenProps) {
-  return <div className="{theme}">{children}</div>;
+  return <div className={"min-h-screen text-gray-600 dark:bg-black"}>{children}</div>;
 }
