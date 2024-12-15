@@ -6,8 +6,7 @@ const ThemeSwitcher: React.FC = () => {
 
   return (
     <div>
-      <p>Current Theme: {theme}</p>
-      <button onClick={toggleTheme}>Toggle Theme</button>
+      <button onClick={toggleTheme}>{theme}</button>
     </div>
   );
 };

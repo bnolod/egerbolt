@@ -1,7 +1,11 @@
-import React, { useContext } from "react";
+import React, { ReactNode, useContext } from "react";
+import { Theme } from "../../types/theme";
 
-export default function Screen() {
-    return <>
-    
-    </>
+interface ScreenProps {
+  theme: Theme;
+  children?: ReactNode;
+}
+
+export default function Screen({ theme, children }: ScreenProps) {
+  return <div className="{theme}">{children}</div>;
 }
