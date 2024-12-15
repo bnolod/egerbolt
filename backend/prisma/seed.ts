@@ -3,58 +3,84 @@ import { faker } from '@faker-js/faker';
 const prisma = new PrismaClient();
 
 const productTypesArray = ['animal', 'toy', 'good product', 'bad product'];
-// enum productTypes {"animal","toy","good product","bad product"}
 
 async function main() {
-  for (let n = 0; n < productTypesArray.length; n++) {
+  // Seed product types
+  for (const type of productTypesArray) {
     const existingType = await prisma.productType.findUnique({
-      where: { type: productTypesArray[n] },
+      where: { type },
     });
-
     if (!existingType) {
-      await prisma.productType.create({
-        data: { type: productTypesArray[n] },
-      });
+      await prisma.productType.create({ data: { type } });
     }
   }
 
-  for (let i = 1; i < 500; i++) {
-    await prisma.user.create({
+  // Seed Users
+  const userIds = [];
+  for (let i = 1; i <= 500; i++) {
+    const user = await prisma.user.create({
       data: {
         email: faker.internet.email(),
         username: faker.person.firstName() + i,
         password: faker.internet.password(),
       },
     });
-    await prisma.product.create({
+    userIds.push(user.id);
+  }
+
+  // Seed Products
+  const productIds = [];
+  for (let i = 1; i <= 500; i++) {
+    const product = await prisma.product.create({
       data: {
         name: faker.lorem.word(),
         description: faker.lorem.words(10),
         price: faker.number.int({ min: 500, max: 50000, multipleOf: 500 }),
         image: faker.image.urlLoremFlickr(),
-        quantity: faker.number.int({min:0, max:50})
+        quantity: faker.number.int({ min: 0, max: 50 }),
       },
     });
-    for (let n = 0; n < productTypesArray.length; n++) {
+
+    productIds.push(product.id);
+
+    // Assign Random Product Types
+    for (const type of productTypesArray) {
       if (faker.datatype.boolean()) {
         await prisma.productToType.create({
           data: {
-            product_id: i,
-            product_type: productTypesArray[n],
+            product_id: product.id,
+            product_type: type,
           },
         });
       }
     }
+  }
 
-    await prisma.cart.create({
-      data: {
-        user_id: i,
-        product_id: i,
-        amount: faker.number.int({ min: 1, max: 50 }),
-      },
-    });
+  // Seed Carts
+  for (const userId of userIds) {
+    const randomProductCount = faker.number.int({ min: 1, max: 10 });
+    const addedProducts = new Set(); //check products already added for this user
+
+    for (let j = 0; j < randomProductCount; j++) {
+      let randomProductId;
+      do {
+        randomProductId =
+          productIds[faker.number.int({ min: 0, max: productIds.length - 1 })];
+      } while (addedProducts.has(randomProductId)); //unique product_id for this user
+
+      addedProducts.add(randomProductId);
+
+      await prisma.cart.create({
+        data: {
+          user_id: userId,
+          product_id: randomProductId,
+          amount: faker.number.int({ min: 1, max: 50 }),
+        },
+      });
+    }
   }
 }
+
 main()
   .then(async () => {
     await prisma.$disconnect();
