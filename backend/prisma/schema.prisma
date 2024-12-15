@@ -58,7 +58,7 @@ model ProductType {
 }
 
 model Cart {
-  id         Int @id @default(autoincrement())
+
   user_id    Int
   product_id Int
   amount     Int
@@ -67,4 +67,5 @@ model Cart {
   User    User    @relation(fields: [user_id], references: [id])
 
   @@map("carts")
+  @@id([user_id, product_id])
 }
