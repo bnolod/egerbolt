@@ -19,28 +19,39 @@ model User {
   password String
   username String
 
-  Cart     Cart[]
+  Cart Cart[]
 
   @@map("users")
 }
 
 model Product {
-  id          Int         @id @default(autoincrement())
+  id          Int    @id @default(autoincrement())
   name        String
   description String
   price       Int
   image       String
-  type        String
 
-  productType ProductType @relation(fields: [type], references: [productType])
-  Cart      Cart[]
+  types ProductToType[]
+  // ProductToType ProductToType @relation(fields: [type], references: [productType])
+  Cart  Cart[]
 
   @@map("products")
 }
 
+model ProductToType {
+  product_id   Int
+  product_type String
+
+  Product     Product     @relation(fields: [product_id], references: [id])
+  ProductType ProductType @relation(fields: [product_type], references: [type])
+
+  @@unique([product_id, product_type])
+}
+
 model ProductType {
-  productType String    @unique
-  products    Product[]
+  type String @unique
+
+  ProductToType ProductToType[]
 
   @@map("product_types")
 }
