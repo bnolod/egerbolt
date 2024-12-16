@@ -34,6 +34,6 @@ export default function CartCard(props: CardProps) {
             {props.quantity} db
         </p>
         </div>
-        <IconButton className="text-black bg-red-600 w-min px-6" text="Törlés a kosárból"><TrashIcon className="size-12"/></IconButton>
+        <IconButton className="text-black bg-red-600 w-min px-6" text="Törlés a kosárból" onClick={handleRemove}><TrashIcon className="size-12"/></IconButton>
     </Card>
 }

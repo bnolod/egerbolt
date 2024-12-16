@@ -36,8 +36,8 @@ export default function ProductCard(props: ProductCardProps) {
         />
 
         <div>
-          <h1 className="text-primary ">{props.name}</h1>
-          <p className="text-secondary truncate">{props.description}</p>
+          <h1 className="text-primary text-2xl font-bold ">{props.name}</h1>
+          <p className="text-secondary truncate text-md">{props.description}</p>
           <div className="flex flex-row justify-evenly">
             <p className="text-primary">{props.price} huf</p>
             <p className="text-primary">{props.quantity} db</p>

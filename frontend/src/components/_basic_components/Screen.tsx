@@ -15,7 +15,7 @@ export default function Screen({
   className,
   centeredContent,
 }: ScreenProps) {
-  return (<div className="min-h-screen bg-primary">
+  return (<div className="min-h-screen bg-primary ">
     {navbar ? <Navbar /> : null}
     <div
       className={
