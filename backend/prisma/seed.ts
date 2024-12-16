@@ -36,7 +36,11 @@ async function main() {
         name: faker.lorem.word(),
         description: faker.lorem.words(10),
         price: faker.number.int({ min: 500, max: 50000, multipleOf: 500 }),
-        image: faker.image.urlLoremFlickr(),
+        image: faker.image.urlLoremFlickr({
+          width: 512,
+          height: 512,
+          category: 'product',
+        }),
         quantity: faker.number.int({ min: 0, max: 50 }),
       },
     });

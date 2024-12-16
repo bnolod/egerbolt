@@ -5,7 +5,12 @@ import { PrismaService } from 'src/prisma.service';
 export class ProductsService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async findAll(page = 1, search = '', limit = 9) {
+  async findAll(
+    page = 1,
+    search = '',
+    orderBy: 'asc' | 'desc' = 'asc',
+    limit = 9,
+  ) {
     const skip = (page - 1) * limit;
 
     const [products, total] = await Promise.all([
@@ -18,7 +23,7 @@ export class ProductsService {
         },
         skip,
         take: limit,
-        orderBy: { id: 'desc' }, // Order by ID
+        orderBy: { price: orderBy }, // Order by the parameter
       }),
       this.prisma.product.count({
         where: {
