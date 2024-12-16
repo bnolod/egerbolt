@@ -3,20 +3,17 @@ import { ReactNode } from "react";
 import Navbar from "../_navbar/Navbar";
 
 interface ScreenProps {
-  navbar?: boolean;
   children?: ReactNode;
   className?: string;
   centeredContent?: boolean;
 }
 
-export default function Screen({
-  navbar,
+export default function Subscreen({
   children,
   className,
   centeredContent,
 }: ScreenProps) {
-  return (<div className="min-h-screen bg-primary">
-    {navbar ? <Navbar /> : null}
+  return (<div className="min-h-screen bg-primary sm:w-full md:w-2/3">
     <div
       className={
         "" +

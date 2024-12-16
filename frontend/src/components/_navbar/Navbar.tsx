@@ -48,7 +48,9 @@ export default function Example() {
                 className="h-8 w-auto"
               />
             </div> */}
-            <ThemeSwitcher />
+            <div className="flex flex-shrink-0 items-center">
+              <ThemeSwitcher />
+            </div>
             <div className="hidden sm:ml-6 sm:block">
               <div className="flex space-x-4">
                 {navigation.map((item) => (
