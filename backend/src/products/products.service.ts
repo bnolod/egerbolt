@@ -45,8 +45,18 @@ export class ProductsService {
     };
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} product`;
+  async findOne(id: number) {
+    const product = await this.prisma.product.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    if (!product) {
+      throw new Error(`Product with ID ${id} not found :PPP`);
+    }
+
+    return product;
   }
 
   remove(id: number) {
