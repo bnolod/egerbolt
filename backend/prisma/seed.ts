@@ -33,14 +33,12 @@ async function main() {
   for (let i = 1; i <= 500; i++) {
     const product = await prisma.product.create({
       data: {
-        name: faker.lorem.word(),
+        name: faker.animal.petName() + faker.color.human(),
         description: faker.lorem.words(10),
         price: faker.number.int({ min: 500, max: 50000, multipleOf: 500 }),
-        image: faker.image.urlLoremFlickr({
-          width: 512,
-          height: 512,
-          category: 'product',
-        }),
+        image: faker.image.avatar(
+
+        ),
         quantity: faker.number.int({ min: 0, max: 50 }),
       },
     });

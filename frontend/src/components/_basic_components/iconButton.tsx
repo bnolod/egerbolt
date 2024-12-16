@@ -6,6 +6,7 @@ interface ButtonProps {
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   className?: string;
   size?: number;
+  iconRight?: boolean
 }
 
 export default function IconButton(props: ButtonProps) {
@@ -18,8 +19,10 @@ export default function IconButton(props: ButtonProps) {
         (props.text ? " rounded-lg" : " rounded-full")
       }
     >
-      {props.children}
+      
+      {!props.iconRight && props.children}
       {props.text && <span className="flex-grow">{props.text}</span>}
+      {props.iconRight && props.children}
     </button>
   );
 }

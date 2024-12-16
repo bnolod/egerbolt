@@ -23,7 +23,7 @@ export default function ProductCard(props: ProductCardProps) {
         <img
           src={props.image}
           alt={props.name}
-          className="h-48 w-48 rounded-xl object-cover"
+          className="h-48 w-full rounded-xl object-cover"
         />
 
         <div>
