@@ -110,7 +110,7 @@ export default function ProductsPage() {
           </SortPanel>
           {products.map((data) => (
             <ProductCard
-              className="flex-grow"
+              className="flex-grow basis-full sm:basis-1/4"
               key={data.id} // Provide a unique key for each element
               id={data.id}
               name={data.name}
