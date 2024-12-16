@@ -37,6 +37,7 @@ export class ProductsService {
 
     const totalPages = Math.ceil(total / limit);
 
+    console.log("fasz")
     return {
       products,
       totalPages,

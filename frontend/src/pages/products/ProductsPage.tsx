@@ -5,33 +5,64 @@ import ProductCard, {
 import Screen from "../../components/_basic_components/Screen";
 import Subscreen from "../../components/_basic_components/subScreen";
 import IconButton from "../../components/_basic_components/iconButton";
-import { ArrowDownIcon } from "@heroicons/react/20/solid";
 import SortPanel from "../../components/products/sortPanel";
 import { Product } from "../../types/productTypes";
 import { getProductsPage } from "../../hooks/fetchProducts";
 import { backendUrl } from "../../constants/backend_constants";
+import { ArrowUpIcon, ArrowDownIcon } from "@heroicons/react/24/outline";
 
 export default function ProductsPage() {
   const [products, setProducts] = useState<Array<Product>>([]);
+  const [totalPageCount, setTotalPageCount] = useState<number>();
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [search, setSearch] = useState<string>("");
+  const [order, setOrder] = useState<"asc" | "desc">("desc");
 
-  useEffect(() => {
-    fetch(backendUrl+'products?search=&page=1', {
-      method: "GET",
-      headers: {
-      },
-    })
+  function fetchProducts() {
+    fetch(
+      `${backendUrl}products?search=${search}&page=${currentPage}&orderBy=${order}`,
+      {
+        method: "GET",
+        headers: {},
+      }
+    )
       .then((response) => response.json())
       .then((data) => {
-        setProducts(data.products); // Update the products state with fetched data
+        setProducts(data.products);
+        setTotalPageCount(data.totalPages);
       })
       .catch((error) => console.log(error));
-    // setProducts(generatedProducts); // Update state with the products
-  }, []); // Empty dependency array ensures this runs only once on mount
+  }
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  const handleOrder =
+    (value: "asc" | "desc") => (event: React.MouseEvent<HTMLButtonElement>) => {
+      setOrder(value);
+      fetchProducts()
+    };
 
   return (
     <Screen navbar={true} centeredContent={true}>
       <Subscreen className="flex flex-row flex-wrap justify-center">
-      <SortPanel></SortPanel>
+        <SortPanel>
+          <IconButton
+            text="Ár csökkenő"
+            className="bg-secondary p-2 m-2"
+            onClick={handleOrder("desc")}
+          >
+            <ArrowDownIcon className="size-4" />
+          </IconButton>
+          <IconButton
+            text="Ár növekvő"
+            className="bg-secondary p-2 m-2"
+            onClick={handleOrder("asc")}
+          >
+            <ArrowUpIcon className="size-4" />
+          </IconButton>
+        </SortPanel>
         {products.map((data) => (
           <ProductCard
             className="flex-grow"
@@ -46,7 +77,7 @@ export default function ProductsPage() {
       </Subscreen>
       <Subscreen>
         <IconButton className="bg-accent-primary hover:bg-accent-secondary active:outline-2 p-2 m-2 text-md text-center">
-          <ArrowDownIcon className="size-6"/>
+          <ArrowDownIcon className="size-6" />
         </IconButton>
       </Subscreen>
     </Screen>
