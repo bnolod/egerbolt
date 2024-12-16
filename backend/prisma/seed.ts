@@ -36,9 +36,7 @@ async function main() {
         name: faker.animal.petName() + faker.color.human(),
         description: faker.lorem.words(10),
         price: faker.number.int({ min: 500, max: 50000, multipleOf: 500 }),
-        image: faker.image.avatar(
-
-        ),
+        image: faker.image.urlPicsumPhotos() ,
         quantity: faker.number.int({ min: 0, max: 50 }),
       },
     });

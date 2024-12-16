@@ -9,6 +9,7 @@ import SortPanel from "../../components/products/sortPanel";
 import { Product } from "../../types/productTypes";
 import { getProductsPage } from "../../hooks/fetchProducts";
 import { backendUrl } from "../../constants/backend_constants";
+
 import {
   ArrowUpIcon,
   ArrowDownIcon,
@@ -16,6 +17,7 @@ import {
   ArrowLeftIcon,
   ArrowRightIcon,
 } from "@heroicons/react/24/outline";
+import Footer from "../../components/_basic_components/footer";
 
 export default function ProductsPage() {
   const [products, setProducts] = useState<Array<Product>>([]);
@@ -63,7 +65,7 @@ export default function ProductsPage() {
     <Screen navbar={true} centeredContent={true}>
       {/* Loading Screen */}
       {loading && (
-        <Subscreen className="flex justify-center items-center">
+        <Subscreen className="flex justify-center content-center">
           <div className="spinner">Loading...</div>{" "}
           {/* You can replace this with a spinner component */}
         </Subscreen>
@@ -71,7 +73,7 @@ export default function ProductsPage() {
 
       {/* Products and Sorting Panel */}
       {!loading && (
-        <Subscreen className="flex flex-row flex-wrap justify-center">
+        <Subscreen className="flex flex-row flex-wrap justify-center content-center">
           <SortPanel>
             <IconButton
               text="Ár csökkenő"
@@ -110,6 +112,7 @@ export default function ProductsPage() {
             <ProductCard
               className="flex-grow"
               key={data.id} // Provide a unique key for each element
+              id={data.id}
               name={data.name}
               description={data.description}
               image={data.image}
@@ -119,11 +122,7 @@ export default function ProductsPage() {
           ))}
         </Subscreen>
       )}
-      <Subscreen>
-        <IconButton className="bg-accent-primary hover:bg-accent-secondary active:outline-2 p-2 m-2 text-md text-center">
-          <ArrowDownIcon className="size-6" />
-        </IconButton>
-      </Subscreen>
+      <Footer/>
     </Screen>
   );
 }

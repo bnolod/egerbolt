@@ -9,7 +9,7 @@ export class ProductsService {
     page = 1,
     search = '',
     orderBy: 'asc' | 'desc' = 'asc',
-    limit = 9,
+    limit = 20,
   ) {
     const skip = (page - 1) * limit;
 
@@ -36,8 +36,6 @@ export class ProductsService {
     ]);
 
     const totalPages = Math.ceil(total / limit);
-
-    console.log("fasz")
     return {
       products,
       totalPages,

@@ -20,8 +20,8 @@ export default function Screen({
     <div
       className={
         "" +
-        (className ? className : "") +
-        (centeredContent ? "flex flex-col flex-wrap justify-center content-center" : "")
+        (className && className) +
+        (centeredContent ? " flex flex-col flex-wrap justify-center content-center items-center" : "")
       }
     >
       

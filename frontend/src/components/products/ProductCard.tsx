@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import IconButton from "../_basic_components/iconButton";
 import { ShoppingCartIcon } from "@heroicons/react/24/outline";
+import { useCart } from "../../contexts/cartContext";
 
 export interface ProductCardProps {
+  id: number;
   name: string;
   description: string;
   image: string;
@@ -11,7 +13,14 @@ export interface ProductCardProps {
   className?: string;
 }
 
+
 export default function ProductCard(props: ProductCardProps) {
+  
+  const { addToCart } = useCart();
+
+  const handleAddToCart = () => {
+    addToCart({id : props.id, name:props.name, price:props.price, quantity:1});
+  };
   return (
     <div
       className={
@@ -37,6 +46,7 @@ export default function ProductCard(props: ProductCardProps) {
         <IconButton
           className="bg-accent-primary hover:bg-accent-secondary active:text-accent-primary h-auto text-md p-2 m-2"
           text="Kosárba helyezés"
+          onClick={handleAddToCart}
         >
           <ShoppingCartIcon className="size-6" />
         </IconButton>

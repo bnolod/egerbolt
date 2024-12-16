@@ -13,17 +13,14 @@ export default function Subscreen({
   className,
   centeredContent,
 }: ScreenProps) {
-  return (<div className="min-h-screen bg-primary sm:w-full md:w-2/3">
-    <div
-      className={
-        "" +
-        (className ? className : "") +
-        (centeredContent ? "flex flex-col flex-wrap justify-center content-center" : "")
-      }
-    >
+  return (<div className={"min-h-screen bg-primary sm:w-full md:w-2/3" +
+    " " +
+    (className ? className : "") +
+    (centeredContent ? "flex flex-col flex-wrap justify-center content-center" : "")
+  }>
+ 
       
       {children}
-    </div>
     </div>
   );
 }

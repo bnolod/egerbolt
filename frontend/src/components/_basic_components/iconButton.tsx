@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 interface ButtonProps {
   text?: string;
   children: ReactNode;
-  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onClick?: any;
   className?: string;
   size?: number;
   iconRight?: boolean
